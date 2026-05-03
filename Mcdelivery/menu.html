@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>McDelivery — Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- BACKGROUND DECORATION -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 21V10C2 5.8 5 3 9 3C10.8 3 12.4 4 13 5.5C13.6 4 15.2 3 17 3C21 3 24 5.8 24 10V21H20.5V10.5C20.5 8 19 6 17 6C15 6 13.5 8 13.5 10.5V21H12.5V10.5C12.5 8 11 6 9 6C7 6 5.5 8 5.5 10.5V21H2Z" fill="white"/>
+          </svg>
+        </div>
+        <span class="brand-text">McDelivery</span>
+      </a>
+
+      <div class="nav-search-wrap">
+        <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="nav-search-input" type="text" id="navSearchInput" placeholder="Search your McDonald's favorites…"/>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html" style="background:rgba(0,0,0,0.1);border-radius:8px;padding:6px 10px;">Menu</a></li>
+        <li><a href="send-to-many.html">Send to Many</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li class="divider"></li>
+        <li><a href="#" class="nav-link-signup" id="signupNavBtn">Sign Up</a></li>
+        <li><a href="#" class="nav-link-login" id="loginNavBtn">Log In</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="send-to-many.html">Send to Many</a></li>
+      <li><a href="orders.html">Orders</a></li>
+      <li><a href="#" id="signupMobileBtn">Sign Up</a></li>
+      <li><a href="#">Log In</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO BANNER -->
+  <div class="menu-hero">
+    <div class="menu-hero-inner">
+      <div class="menu-hero-text">
+        <h1>What are you<br/>craving today?</h1>
+        <p>Fresh, hot, and delivered to your door in 30–45 minutes. Order your McDonald's favorites now.</p>
+      </div>
+      <div class="menu-hero-emojis">
+        <span class="menu-hero-emoji-item">🍔</span>
+        <span class="menu-hero-emoji-item">🍟</span>
+        <span class="menu-hero-emoji-item">🥤</span>
+        <span class="menu-hero-emoji-item">🍦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERY STRIP -->
+  <div class="delivery-strip">
+    <div class="delivery-strip-inner">
+      <div class="delivery-badge">
+        <div class="delivery-dot"></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span id="deliveryAddrDisplay">Set your delivery address</span>
+      </div>
+      <div class="delivery-info-row">
+        <span class="delivery-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <strong>30–45 min</strong>&nbsp;delivery
+        </span>
+        <span class="delivery-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <strong>Free delivery</strong>&nbsp;over ₱500
+        </span>
+        <button class="delivery-change-btn" onclick="window.location.href='index.html'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Change Address
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="menu-page-body">
+
+    <!-- SIDEBAR -->
+    <aside class="menu-sidebar">
+      <div class="sidebar-section">
+        <p class="sidebar-title">Categories</p>
+        <button class="sidebar-cat-link active" data-cat="all">
+          <span class="sidebar-cat-emoji">🍽️</span>
+          All Items
+          <span class="sidebar-cat-count" id="countAll">13</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="burgers">
+          <span class="sidebar-cat-emoji">🍔</span>
+          Burgers
+          <span class="sidebar-cat-count" id="countBurgers">3</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="chicken">
+          <span class="sidebar-cat-emoji">🍗</span>
+          Chicken
+          <span class="sidebar-cat-count" id="countChicken">2</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="breakfast">
+          <span class="sidebar-cat-emoji">🥞</span>
+          Breakfast
+          <span class="sidebar-cat-count" id="countBreakfast">2</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="sides">
+          <span class="sidebar-cat-emoji">🍟</span>
+          Sides
+          <span class="sidebar-cat-count" id="countSides">1</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="drinks">
+          <span class="sidebar-cat-emoji">🥤</span>
+          Drinks
+          <span class="sidebar-cat-count" id="countDrinks">2</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="desserts">
+          <span class="sidebar-cat-emoji">🍦</span>
+          Desserts
+          <span class="sidebar-cat-count" id="countDesserts">2</span>
+        </button>
+        <button class="sidebar-cat-link" data-cat="happy-meal">
+          <span class="sidebar-cat-emoji">🎁</span>
+          Happy Meal
+          <span class="sidebar-cat-count" id="countHappy">1</span>
+        </button>
+      </div>
+
+      <!-- Promo -->
+      <div class="promo-card">
+        <p class="promo-card-title">Limited Offer</p>
+        <p class="promo-card-headline">20% off your first order!</p>
+        <p class="promo-card-sub">Use the code at checkout to save.</p>
+        <span class="promo-card-code" id="promoCodeCopy" title="Click to copy">MCDO20</span>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="menu-content">
+
+      <!-- Mobile category pills -->
+      <div class="menu-cat-pills" id="catPills">
+        <button class="cat-pill active" data-cat="all">🍽️ All</button>
+        <button class="cat-pill" data-cat="burgers">🍔 Burgers</button>
+        <button class="cat-pill" data-cat="chicken">🍗 Chicken</button>
+        <button class="cat-pill" data-cat="breakfast">🥞 Breakfast</button>
+        <button class="cat-pill" data-cat="sides">🍟 Sides</button>
+        <button class="cat-pill" data-cat="drinks">🥤 Drinks</button>
+        <button class="cat-pill" data-cat="desserts">🍦 Desserts</button>
+        <button class="cat-pill" data-cat="happy-meal">🎁 Happy Meal</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="menu-toolbar">
+        <div class="menu-search-wrap">
+          <svg class="menu-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="menu-search-input" type="text" id="menuSearch" placeholder="Search items…"/>
+        </div>
+        <select class="menu-sort-select" id="sortSelect">
+          <option value="default">Sort: Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+        <span class="menu-results-count" id="resultsCount">13 items</span>
+      </div>
+
+      <!-- Items container -->
+      <div id="menuItemsContainer"></div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING CART -->
+  <div class="floating-cart" id="floatingCart">
+    <div class="floating-cart-inner">
+      <div class="cart-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <div class="cart-badge" id="cartBadge">0</div>
+      </div>
+      <div class="cart-meta">
+        <p class="cart-meta-count" id="cartMetaCount">0 items</p>
+        <p class="cart-meta-total" id="cartMetaTotal">₱0</p>
+      </div>
+      <button class="cart-checkout-btn" id="cartCheckoutBtn">
+        Place Order
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ITEM DETAIL MODAL -->
+  <div class="item-modal-overlay" id="itemModalOverlay">
+    <div class="item-modal" id="itemModal" role="dialog" aria-modal="true" style="position:relative;">
+      <button class="item-modal-close" id="itemModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="item-modal-img" id="itemModalImg"></div>
+      <div class="item-modal-body">
+        <p class="item-modal-tag" id="itemModalTag"></p>
+        <h2 class="item-modal-name" id="itemModalName"></h2>
+        <p class="item-modal-desc" id="itemModalDesc"></p>
+        <p class="item-modal-price" id="itemModalPrice"></p>
+
+        <!-- Size selector (shown for relevant items) -->
+        <div class="item-modal-size" id="itemModalSizeWrap">
+          <p class="item-modal-size-label">Size</p>
+          <div class="item-modal-sizes">
+            <button class="size-btn selected" data-mult="1">Regular</button>
+            <button class="size-btn" data-mult="1.25">Medium (+₱30)</button>
+            <button class="size-btn" data-mult="1.45">Large (+₱60)</button>
+          </div>
+        </div>
+
+        <div class="item-modal-footer">
+          <div class="item-modal-qty">
+            <button class="modal-qty-btn" id="modalQtyMinus">−</button>
+            <span class="modal-qty-num" id="modalQtyNum">1</span>
+            <button class="modal-qty-btn" id="modalQtyPlus">+</button>
+          </div>
+          <button class="item-modal-add-btn" id="itemModalAddBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Add to Order · <span id="modalAddTotal">₱0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span>✅</span>
+    <span id="toastMsg">Added to order</span>
+  </div>
+
+  <script>
+  'use strict';
+
+  // ── DATA ────────────────────────────────────
+  const MENU_ITEMS = [
+    { id: 1,  cat: 'burgers',    name: 'Big Mac',                 emoji: '🍔', price: 249, desc: 'Two all-beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun.', featured: false, bg: 'linear-gradient(135deg,#FFF3CD,#FFE082)', sizes: false },
+    { id: 2,  cat: 'burgers',    name: 'Quarter Pounder',         emoji: '🍔', price: 289, desc: 'A quarter pound of fresh beef, cheese, onions, pickles, and mustard on a toasted bun.', featured: false, bg: 'linear-gradient(135deg,#FCE4EC,#F48FB1)', sizes: false },
+    { id: 3,  cat: 'burgers',    name: 'McDouble',                emoji: '🍔', price: 199, desc: 'Double beef patties with melted cheese, pickles, onions, ketchup and mustard.', featured: false, bg: 'linear-gradient(135deg,#E8F5E9,#A5D6A7)', sizes: false },
+    { id: 4,  cat: 'chicken',    name: 'McChicken',               emoji: '🍗', price: 179, desc: 'A crispy chicken patty with creamy mayo and fresh lettuce on a soft toasted bun.', featured: false, bg: 'linear-gradient(135deg,#FFF9C4,#FFF176)', sizes: false },
+    { id: 5,  cat: 'chicken',    name: 'Chicken McNuggets (6 pc)',  emoji: '🍗', price: 169, desc: 'Tender, juicy chicken nuggets in a crispy coating. Comes with your choice of dipping sauce.', featured: false, bg: 'linear-gradient(135deg,#FFE0B2,#FFCC80)', sizes: false },
+    { id: 6,  cat: 'breakfast',  name: 'Hotcakes & Sausage',      emoji: '🥞', price: 149, desc: 'Fluffy golden hotcakes served with a savory pork sausage patty and maple syrup.', featured: false, bg: 'linear-gradient(135deg,#FFF3E0,#FFE0B2)', sizes: false },
+    { id: 7,  cat: 'breakfast',  name: 'Egg McMuffin',             emoji: '🥚', price: 139, desc: 'A freshly cracked egg, Canadian bacon, and melted cheese on a toasted English muffin.', featured: false, bg: 'linear-gradient(135deg,#FFFDE7,#FFF9C4)', sizes: false },
+    { id: 8,  cat: 'sides',      name: 'World Famous Fries',      emoji: '🍟', price: 99,  desc: 'Crispy, golden, and perfectly salted. The fries that made McDonald\'s famous worldwide.', featured: true,  bg: 'linear-gradient(135deg,#FFC72C33,#FFC72C66)', sizes: true },
+    { id: 9,  cat: 'drinks',     name: 'Coca-Cola',               emoji: '🥤', price: 69,  desc: 'Ice-cold Coca-Cola fountain drink. The perfect companion for any McDonald\'s meal.', featured: false, bg: 'linear-gradient(135deg,#E3F2FD,#90CAF9)', sizes: true },
+    { id: 10, cat: 'drinks',     name: 'McCafé Frappe',           emoji: '🥛', price: 159, desc: 'Blended iced coffee with a choice of flavors — Caramel, Mocha, or Vanilla. Topped with whipped cream.', featured: false, bg: 'linear-gradient(135deg,#F3E5F5,#CE93D8)', sizes: true },
+    { id: 11, cat: 'desserts',   name: 'Soft Serve Cone',         emoji: '🍦', price: 39,  desc: 'A smooth, creamy vanilla soft serve swirled into a crispy cone. A timeless classic.', featured: false, bg: 'linear-gradient(135deg,#FCEAFF,#E8B0FF)', sizes: false },
+    { id: 12, cat: 'desserts',   name: 'Apple Pie',               emoji: '🥧', price: 59,  desc: 'A warm, flaky pastry filled with sweet cinnamon-spiced apples. Baked fresh every day.', featured: false, bg: 'linear-gradient(135deg,#FFF8E1,#FFE082)', sizes: false },
+    { id: 13, cat: 'happy-meal', name: 'Hamburger Happy Meal',    emoji: '🎁', price: 199, desc: 'A hamburger, small fries, apple slices, and a drink — plus a fun toy for the kids!', featured: false, bg: 'linear-gradient(135deg,#E8F5E9,#66BB6A44)', sizes: false },
+  ];
+
+  const CAT_LABELS = {
+    'all': 'All Items', 'burgers': 'Burgers', 'chicken': 'Chicken',
+    'breakfast': 'Breakfast', 'sides': 'Sides', 'drinks': 'Drinks',
+    'desserts': 'Desserts', 'happy-meal': 'Happy Meal'
+  };
+
+  // ── STATE ────────────────────────────────────
+  let activeCat  = 'all';
+  let searchQuery = '';
+  let sortMode   = 'default';
+  let cart       = {}; // { itemId: qty }
+  let modalItem  = null;
+  let modalQty   = 1;
+  let modalSizeMult = 1;
+
+  // ── DOM ──────────────────────────────────────
+  const menuContainer  = document.getElementById('menuItemsContainer');
+  const menuSearch     = document.getElementById('menuSearch');
+  const navSearch      = document.getElementById('navSearchInput');
+  const sortSelect     = document.getElementById('sortSelect');
+  const resultsCount   = document.getElementById('resultsCount');
+  const floatingCart   = document.getElementById('floatingCart');
+  const cartBadge      = document.getElementById('cartBadge');
+  const cartMetaCount  = document.getElementById('cartMetaCount');
+  const cartMetaTotal  = document.getElementById('cartMetaTotal');
+  const cartCheckoutBtn= document.getElementById('cartCheckoutBtn');
+  const toast          = document.getElementById('toast');
+  const toastMsg       = document.getElementById('toastMsg');
+
+  // Modal
+  const itemModalOverlay = document.getElementById('itemModalOverlay');
+  const itemModalClose   = document.getElementById('itemModalClose');
+  const itemModalImg     = document.getElementById('itemModalImg');
+  const itemModalTag     = document.getElementById('itemModalTag');
+  const itemModalName    = document.getElementById('itemModalName');
+  const itemModalDesc    = document.getElementById('itemModalDesc');
+  const itemModalPrice   = document.getElementById('itemModalPrice');
+  const itemModalSizeWrap= document.getElementById('itemModalSizeWrap');
+  const modalQtyMinus    = document.getElementById('modalQtyMinus');
+  const modalQtyPlus     = document.getElementById('modalQtyPlus');
+  const modalQtyNum      = document.getElementById('modalQtyNum');
+  const itemModalAddBtn  = document.getElementById('itemModalAddBtn');
+  const modalAddTotal    = document.getElementById('modalAddTotal');
+
+  // ── RENDER ───────────────────────────────────
+  function getFilteredItems() {
+    let items = MENU_ITEMS.slice();
+    if (activeCat !== 'all') items = items.filter(i => i.cat === activeCat);
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      items = items.filter(i => i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q));
+    }
+    if (sortMode === 'price-asc')  items.sort((a, b) => a.price - b.price);
+    if (sortMode === 'price-desc') items.sort((a, b) => b.price - a.price);
+    if (sortMode === 'name')       items.sort((a, b) => a.name.localeCompare(b.name));
+    return items;
+  }
+
+  function renderMenu() {
+    const items = getFilteredItems();
+    resultsCount.textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+
+    if (!items.length) {
+      menuContainer.innerHTML = `
+        <div class="no-results">
+          <div class="no-results-emoji">🔍</div>
+          <h3>No items found</h3>
+          <p>Try a different search or category.</p>
+        </div>`;
+      return;
+    }
+
+    if (sortMode !== 'default' || searchQuery) {
+      // Flat grid
+      menuContainer.innerHTML = `<div class="menu-items-grid" id="flatGrid"></div>`;
+      const grid = document.getElementById('flatGrid');
+      items.forEach(item => grid.appendChild(createCard(item)));
+    } else {
+      // Grouped by category
+      const cats = activeCat === 'all'
+        ? [...new Set(MENU_ITEMS.map(i => i.cat))]
+        : [activeCat];
+
+      menuContainer.innerHTML = '';
+      cats.forEach(cat => {
+        const catItems = items.filter(i => i.cat === cat);
+        if (!catItems.length) return;
+        const section = document.createElement('div');
+        section.innerHTML = `<h2 class="menu-cat-heading">${getCatEmoji(cat)} ${CAT_LABELS[cat]}</h2>`;
+        const grid = document.createElement('div');
+        grid.className = 'menu-items-grid';
+        catItems.forEach(item => grid.appendChild(createCard(item)));
+        section.appendChild(grid);
+        menuContainer.appendChild(section);
+      });
+    }
+
+    // Attach add-button events
+    menuContainer.querySelectorAll('.menu-item-add-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const id = parseInt(btn.dataset.id);
+        addToCart(id, 1);
+      });
+    });
+
+    // Attach card click → modal
+    menuContainer.querySelectorAll('.menu-item-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = parseInt(card.dataset.id);
+        openModal(id);
+      });
+    });
+  }
+
+  function createCard(item) {
+    const card = document.createElement('div');
+    card.className = 'menu-item-card' + (item.featured ? ' featured' : '');
+    card.dataset.id = item.id;
+    const inCart = getCartQty(item.id);
+    card.innerHTML = `
+      <div class="menu-item-img" style="background:${item.bg};">
+        <span class="menu-item-emoji">${item.emoji}</span>
+      </div>
+      <div class="menu-item-body">
+        <p class="menu-item-tag">${CAT_LABELS[item.cat]}</p>
+        <h3 class="menu-item-name">${item.name}</h3>
+        <p class="menu-item-desc">${item.desc}</p>
+        <div class="menu-item-footer">
+          <span class="menu-item-price">₱${item.price}</span>
+          <button class="menu-item-add-btn${inCart ? ' added' : ''}" data-id="${item.id}" aria-label="Add ${item.name}">
+            ${inCart
+              ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>`
+              : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>`
+            }
+          </button>
+        </div>
+      </div>`;
+    return card;
+  }
+
+  function getCatEmoji(cat) {
+    const map = { burgers:'🍔', chicken:'🍗', breakfast:'🥞', sides:'🍟', drinks:'🥤', desserts:'🍦', 'happy-meal':'🎁' };
+    return map[cat] || '🍽️';
+  }
+
+  // ── CART ─────────────────────────────────────
+  function getCartQty(id) { return cart[id] || 0; }
+
+  function getCartTotal() {
+    return MENU_ITEMS.reduce((sum, item) => sum + item.price * (cart[item.id] || 0), 0);
+  }
+
+  function getCartCount() {
+    return Object.values(cart).reduce((a, b) => a + b, 0);
+  }
+
+  function addToCart(id, qty) {
+    cart[id] = (cart[id] || 0) + qty;
+    updateCartUI();
+    const item = MENU_ITEMS.find(i => i.id === id);
+    showToast(`${item.emoji} ${item.name} added!`);
+    renderMenu();
+  }
+
+  function updateCartUI() {
+    const count = getCartCount();
+    const total = getCartTotal();
+    cartBadge.textContent = count;
+    cartMetaCount.textContent = `${count} item${count !== 1 ? 's' : ''}`;
+    cartMetaTotal.textContent = `₱${total.toLocaleString()}`;
+    if (count > 0) floatingCart.classList.add('visible');
+    else           floatingCart.classList.remove('visible');
+  }
+
+  // ── MODAL ────────────────────────────────────
+  function openModal(id) {
+    modalItem = MENU_ITEMS.find(i => i.id === id);
+    if (!modalItem) return;
+    modalQty = 1;
+    modalSizeMult = 1;
+
+    itemModalImg.style.background = modalItem.bg;
+    itemModalImg.textContent = modalItem.emoji;
+    itemModalTag.textContent  = CAT_LABELS[modalItem.cat];
+    itemModalName.textContent = modalItem.name;
+    itemModalDesc.textContent = modalItem.desc;
+
+    // Size selector visibility
+    itemModalSizeWrap.style.display = modalItem.sizes ? '' : 'none';
+    document.querySelectorAll('.size-btn').forEach(b => {
+      b.classList.remove('selected');
+      if (parseFloat(b.dataset.mult) === 1) b.classList.add('selected');
+    });
+    modalSizeMult = 1;
+
+    updateModalTotal();
+    itemModalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    itemModalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    modalItem = null;
+  }
+
+  function updateModalTotal() {
+    if (!modalItem) return;
+    const price = Math.round(modalItem.price * modalSizeMult);
+    itemModalPrice.textContent = `₱${price}`;
+    modalQtyNum.textContent    = modalQty;
+    modalAddTotal.textContent  = `₱${(price * modalQty).toLocaleString()}`;
+  }
+
+  itemModalClose.addEventListener('click', closeModal);
+  itemModalOverlay.addEventListener('click', e => { if (e.target === itemModalOverlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  modalQtyMinus.addEventListener('click', () => {
+    if (modalQty > 1) { modalQty--; updateModalTotal(); }
+  });
+  modalQtyPlus.addEventListener('click', () => {
+    modalQty++;
+    updateModalTotal();
+  });
+
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      modalSizeMult = parseFloat(btn.dataset.mult);
+      updateModalTotal();
+    });
+  });
+
+  itemModalAddBtn.addEventListener('click', () => {
+    if (!modalItem) return;
+    addToCart(modalItem.id, modalQty);
+    closeModal();
+  });
+
+  // ── CATEGORY FILTER ──────────────────────────
+  function setCat(cat) {
+    activeCat = cat;
+
+    document.querySelectorAll('.sidebar-cat-link').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+
+    renderMenu();
+  }
+
+  document.querySelectorAll('.sidebar-cat-link').forEach(btn => {
+    btn.addEventListener('click', () => setCat(btn.dataset.cat));
+  });
+  document.querySelectorAll('.cat-pill').forEach(btn => {
+    btn.addEventListener('click', () => setCat(btn.dataset.cat));
+  });
+
+  // ── SEARCH ────────────────────────────────────
+  function handleSearch(q) {
+    searchQuery = q.trim();
+    renderMenu();
+  }
+
+  menuSearch.addEventListener('input', () => handleSearch(menuSearch.value));
+  navSearch.addEventListener('input', () => {
+    menuSearch.value = navSearch.value;
+    handleSearch(navSearch.value);
+  });
+
+  // ── SORT ─────────────────────────────────────
+  sortSelect.addEventListener('change', () => {
+    sortMode = sortSelect.value;
+    renderMenu();
+  });
+
+  // ── PROMO COPY ───────────────────────────────
+  document.getElementById('promoCodeCopy').addEventListener('click', () => {
+    navigator.clipboard.writeText('MCDO20').catch(() => {});
+    showToast('🎁 Promo code MCDO20 copied!');
+  });
+
+  // ── CART CHECKOUT ────────────────────────────
+  cartCheckoutBtn.addEventListener('click', () => {
+    if (getCartCount() === 0) return;
+    // Persist cart in sessionStorage and go to order page
+    try { sessionStorage.setItem('mcCart', JSON.stringify(cart)); } catch(e) {}
+    window.location.href = 'index.html';
+  });
+
+  // ── TOAST ────────────────────────────────────
+  let toastTimer;
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // ── MOBILE MENU ──────────────────────────────
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // ── DELIVERY ADDRESS ─────────────────────────
+  (function loadSavedAddress() {
+    const addr = sessionStorage.getItem('mcAddress') || localStorage.getItem('mcAddress');
+    if (addr) document.getElementById('deliveryAddrDisplay').textContent = addr;
+  })();
+
+  // ── INIT ─────────────────────────────────────
+  renderMenu();
+  updateCartUI();
+  </script>
+</body>
+</html>

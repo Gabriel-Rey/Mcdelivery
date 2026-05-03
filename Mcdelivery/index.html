@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>McDelivery — Enter Location</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- BACKGROUND DECORATION -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <a href="#" class="nav-brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 21V10C2 5.8 5 3 9 3C10.8 3 12.4 4 13 5.5C13.6 4 15.2 3 17 3C21 3 24 5.8 24 10V21H20.5V10.5C20.5 8 19 6 17 6C15 6 13.5 8 13.5 10.5V21H12.5V10.5C12.5 8 11 6 9 6C7 6 5.5 8 5.5 10.5V21H2Z" fill="white"/>
+          </svg>
+        </div>
+        <span class="brand-text">McDelivery</span>
+      </a>
+
+      <div class="nav-search-wrap">
+        <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="nav-search-input" type="text" placeholder="Search your McDonald's favorites…"/>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="send-to-many.html">Send to Many</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li class="divider"></li>
+        <li><a href="#" class="nav-link-signup" id="signupNavBtn">Sign Up</a></li>
+        <li><a href="#" class="nav-link-login" id="loginNavBtn">Log In</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="send-to-many.html">Send to Many</a></li>
+      <li><a href="orders.html">Orders</a></li>
+      <li><a href="#" id="signupMobileBtn">Sign Up</a></li>
+      <li><a href="#">Log In</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <div class="step-pill active">
+        <span class="step-num">1</span>
+        <span>Set Location</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="layout">
+
+      <!-- LEFT PANEL -->
+      <aside class="left-panel">
+        <div class="panel-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Delivery Address
+        </div>
+        <h1 class="panel-title">Where should<br/>we deliver?</h1>
+        <p class="panel-sub">Drop a pin on the map or type your address to get started. We'll find the closest McDonald's to you.</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🏎️</div>
+            <div>
+              <strong>Fast Delivery</strong>
+              <span>30–45 min average</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🌡️</div>
+            <div>
+              <strong>Always Fresh</strong>
+              <span>Hot & ready at your door</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📍</div>
+            <div>
+              <strong>Nearest Store</strong>
+              <span>Auto-matched to your pin</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT CARD -->
+      <div class="card" id="locationCard">
+
+        <!-- CARD TOP BAR -->
+        <div class="card-topbar">
+          <div class="card-topbar-dot red"></div>
+          <div class="card-topbar-dot yellow"></div>
+          <div class="card-topbar-dot green"></div>
+          <span class="card-topbar-label">Enter Delivery Location</span>
+        </div>
+
+        <!-- SEARCH FIELD -->
+        <div class="card-body">
+          <div class="search-field" id="searchField">
+            <div class="search-left">
+              <svg class="search-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <input
+                type="text"
+                id="addressInput"
+                class="search-input"
+                placeholder="Search for your address here…"
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+            <button class="gps-btn" id="locateBtn" title="Use my location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                <circle cx="12" cy="12" r="8" stroke-dasharray="3 2.5"/>
+              </svg>
+              <span>Locate Me</span>
+            </button>
+          </div>
+
+          <!-- AUTOCOMPLETE DROPDOWN -->
+          <div class="autocomplete" id="autocomplete"></div>
+
+          <!-- STATUS BADGE -->
+          <div class="status-bar" id="statusBar">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Move the map or drag the pin to adjust your location</span>
+          </div>
+        </div>
+
+        <!-- MAP CONTAINER -->
+        <div class="map-wrap">
+          <div id="map"></div>
+          <div class="map-overlay-hint" id="mapHint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l-3 3 3 3"/><path d="M19 9l3 3-3 3"/><path d="M9 5l3-3 3 3"/><path d="M15 19l-3 3-3-3"/></svg>
+            Drag map to reposition
+          </div>
+        </div>
+
+        <!-- CONFIRM AREA -->
+        <div class="card-footer">
+          <div class="selected-address" id="selectedAddress">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="selectedAddressText">No location selected yet</span>
+          </div>
+          <button class="confirm-btn" id="confirmBtn" disabled>
+            <span class="confirm-btn-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Confirm Location
+            </span>
+            <div class="confirm-ripple"></div>
+          </button>
+        </div>
+
+      </div><!-- /.card -->
+    </div><!-- /.layout -->
+  </main>
+
+  <!-- BROWSE MENU SECTION (Step 2) -->
+  <section class="menu-section" id="menuSection" aria-hidden="true">
+    <div class="menu-section-inner">
+
+      <!-- Section Header -->
+      <div class="menu-header">
+        <div class="menu-header-left">
+          <div class="panel-badge" style="margin-bottom:12px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+            Browse Menu
+          </div>
+          <h2 class="menu-title">What are you craving?</h2>
+          <p class="menu-subtitle" id="menuDeliveryAddr">Delivering to your selected address</p>
+        </div>
+        <div class="menu-header-right">
+          <div class="menu-store-badge">
+            <div class="menu-store-icon">🏪</div>
+            <div>
+              <p class="menu-store-name">McDonald's — Nearest Branch</p>
+              <p class="menu-store-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                30–45 min delivery
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Pills -->
+      <div class="menu-cats" id="menuCats">
+        <button class="menu-cat active" data-cat="all">🍔 All</button>
+        <button class="menu-cat" data-cat="burgers">🍔 Burgers</button>
+        <button class="menu-cat" data-cat="chicken">🍗 Chicken</button>
+        <button class="menu-cat" data-cat="breakfast">🥞 Breakfast</button>
+        <button class="menu-cat" data-cat="sides">🍟 Sides</button>
+        <button class="menu-cat" data-cat="drinks">🥤 Drinks</button>
+        <button class="menu-cat" data-cat="desserts">🍦 Desserts</button>
+        <button class="menu-cat" data-cat="happy-meal">🎁 Happy Meal</button>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="menu-grid" id="menuGrid">
+
+        <!-- Burgers -->
+        <div class="menu-card" data-cat="burgers">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFF3CD,#FFE082);">
+            <span class="menu-card-emoji">🍔</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Burgers</p>
+            <h3 class="menu-card-name">Big Mac</h3>
+            <p class="menu-card-desc">Two all-beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱249</span>
+              <button class="menu-add-btn" aria-label="Add Big Mac">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card" data-cat="burgers">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FCE4EC,#F48FB1);">
+            <span class="menu-card-emoji">🍔</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Burgers</p>
+            <h3 class="menu-card-name">Quarter Pounder</h3>
+            <p class="menu-card-desc">A quarter pound of fresh beef, cheese, onions, pickles, and mustard on a toasted bun.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱289</span>
+              <button class="menu-add-btn" aria-label="Add Quarter Pounder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card" data-cat="burgers">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7);">
+            <span class="menu-card-emoji">🫙</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Burgers</p>
+            <h3 class="menu-card-name">McDouble</h3>
+            <p class="menu-card-desc">Double beef patties with melted cheese, pickles, onions, ketchup and mustard.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱199</span>
+              <button class="menu-add-btn" aria-label="Add McDouble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chicken -->
+        <div class="menu-card" data-cat="chicken">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFF9C4,#FFF176);">
+            <span class="menu-card-emoji">🍗</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Chicken</p>
+            <h3 class="menu-card-name">McChicken</h3>
+            <p class="menu-card-desc">A crispy chicken patty with creamy mayo and fresh lettuce on a soft toasted bun.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱179</span>
+              <button class="menu-add-btn" aria-label="Add McChicken">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card" data-cat="chicken">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFE0B2,#FFCC80);">
+            <span class="menu-card-emoji">🍗</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Chicken</p>
+            <h3 class="menu-card-name">Chicken McNuggets (6 pc)</h3>
+            <p class="menu-card-desc">Tender, juicy chicken nuggets in a crispy coating. Comes with your choice of dipping sauce.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱169</span>
+              <button class="menu-add-btn" aria-label="Add McNuggets">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breakfast -->
+        <div class="menu-card" data-cat="breakfast">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2);">
+            <span class="menu-card-emoji">🥞</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Breakfast</p>
+            <h3 class="menu-card-name">Hotcakes &amp; Sausage</h3>
+            <p class="menu-card-desc">Fluffy golden hotcakes served with a savory pork sausage patty and maple syrup.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱149</span>
+              <button class="menu-add-btn" aria-label="Add Hotcakes">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card" data-cat="breakfast">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFFDE7,#FFF9C4);">
+            <span class="menu-card-emoji">🥚</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Breakfast</p>
+            <h3 class="menu-card-name">Egg McMuffin</h3>
+            <p class="menu-card-desc">A freshly cracked egg, Canadian bacon, and melted cheese on a toasted English muffin.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱139</span>
+              <button class="menu-add-btn" aria-label="Add Egg McMuffin">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sides -->
+        <div class="menu-card featured" data-cat="sides">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFC72C33,#FFC72C66);">
+            <span class="menu-card-emoji">🍟</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Sides</p>
+            <h3 class="menu-card-name">World Famous Fries</h3>
+            <p class="menu-card-desc">Crispy, golden, and perfectly salted. The fries that made McDonald's famous worldwide.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱99</span>
+              <button class="menu-add-btn" aria-label="Add Fries">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drinks -->
+        <div class="menu-card" data-cat="drinks">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9);">
+            <span class="menu-card-emoji">🥤</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Drinks</p>
+            <h3 class="menu-card-name">Coca-Cola</h3>
+            <p class="menu-card-desc">Ice-cold Coca-Cola fountain drink. The perfect companion for any McDonald's meal.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱69</span>
+              <button class="menu-add-btn" aria-label="Add Coke">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card" data-cat="drinks">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#F3E5F5,#CE93D8);">
+            <span class="menu-card-emoji">🥛</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Drinks</p>
+            <h3 class="menu-card-name">McCafé Frappe</h3>
+            <p class="menu-card-desc">Blended iced coffee with a choice of flavors — Caramel, Mocha, or Vanilla. Topped with whipped cream.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱159</span>
+              <button class="menu-add-btn" aria-label="Add Frappe">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-card" data-cat="desserts">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FCEAFF,#E8B0FF);">
+            <span class="menu-card-emoji">🍦</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Desserts</p>
+            <h3 class="menu-card-name">Soft Serve Cone</h3>
+            <p class="menu-card-desc">A smooth, creamy vanilla soft serve swirled into a crispy cone. A timeless classic.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱39</span>
+              <button class="menu-add-btn" aria-label="Add Soft Serve">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card" data-cat="desserts">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#FFF8E1,#FFE082);">
+            <span class="menu-card-emoji">🥧</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Desserts</p>
+            <h3 class="menu-card-name">Apple Pie</h3>
+            <p class="menu-card-desc">A warm, flaky pastry filled with sweet cinnamon-spiced apples. Baked fresh every day.</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱59</span>
+              <button class="menu-add-btn" aria-label="Add Apple Pie">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Happy Meal -->
+        <div class="menu-card" data-cat="happy-meal">
+          <div class="menu-card-img" style="background:linear-gradient(135deg,#E8F5E9,#66BB6A44);">
+            <span class="menu-card-emoji">🎁</span>
+          </div>
+          <div class="menu-card-body">
+            <p class="menu-card-tag">Happy Meal</p>
+            <h3 class="menu-card-name">Hamburger Happy Meal</h3>
+            <p class="menu-card-desc">A hamburger, small fries, apple slices, and a drink — plus a fun toy for the kids!</p>
+            <div class="menu-card-footer">
+              <span class="menu-card-price">₱199</span>
+              <button class="menu-add-btn" aria-label="Add Happy Meal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.menu-grid -->
+
+      <!-- Cart Bar -->
+      <div class="cart-bar" id="cartBar">
+        <div class="cart-bar-left">
+          <div class="cart-bar-count" id="cartCount">0</div>
+          <span class="cart-bar-label">items in your order</span>
+        </div>
+        <div class="cart-bar-right">
+          <span class="cart-bar-total" id="cartTotal">₱0</span>
+          <button class="cart-bar-btn" id="cartBarBtn">
+            Place Order
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /.menu-section-inner -->
+  </section>
+
+  <!-- PLACE ORDER SECTION (Step 3) -->
+  <section class="order-section" id="orderSection" aria-hidden="true">
+    <div class="order-section-inner">
+
+      <!-- Section Header -->
+      <div class="order-header">
+        <div class="panel-badge" style="margin-bottom:12px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+          Place Order
+        </div>
+        <h2 class="order-title">Review & Place Your Order</h2>
+        <p class="order-subtitle" id="orderDeliveryAddr">Delivering to your selected address</p>
+      </div>
+
+      <div class="order-layout">
+
+        <!-- LEFT: Order Summary -->
+        <div class="order-summary-col">
+          <div class="order-card">
+            <div class="order-card-header">
+              <h3>Your Order</h3>
+              <button class="order-edit-btn" id="orderEditBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit Order
+              </button>
+            </div>
+
+            <!-- Order Items List -->
+            <div class="order-items-list" id="orderItemsList">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Divider -->
+            <div class="order-divider"></div>
+
+            <!-- Pricing Breakdown -->
+            <div class="order-pricing">
+              <div class="order-pricing-row">
+                <span>Subtotal</span>
+                <span id="orderSubtotal">₱0</span>
+              </div>
+              <div class="order-pricing-row">
+                <span>Delivery Fee</span>
+                <span id="orderDeliveryFee">₱49</span>
+              </div>
+              <div class="order-pricing-row">
+                <span>Service Fee</span>
+                <span>₱15</span>
+              </div>
+              <div class="order-divider" style="margin:12px 0;"></div>
+              <div class="order-pricing-row total">
+                <span>Total</span>
+                <span id="orderGrandTotal">₱0</span>
+              </div>
+            </div>
+
+            <!-- Promo Code -->
+            <div class="order-promo">
+              <div class="order-promo-field">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                <input type="text" id="promoInput" class="order-promo-input" placeholder="Promo code (optional)"/>
+                <button class="order-promo-btn" id="promoApplyBtn">Apply</button>
+              </div>
+              <p class="order-promo-msg" id="promoMsg"></p>
+            </div>
+
+          </div>
+
+          <!-- Delivery Info -->
+          <div class="order-card order-delivery-card">
+            <div class="order-card-header">
+              <h3>Delivery Details</h3>
+            </div>
+            <div class="order-delivery-info">
+              <div class="order-delivery-row">
+                <div class="order-delivery-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <p class="order-delivery-label">Delivering to</p>
+                  <p class="order-delivery-value" id="orderAddrDisplay">—</p>
+                </div>
+              </div>
+              <div class="order-delivery-row">
+                <div class="order-delivery-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div>
+                  <p class="order-delivery-label">Estimated time</p>
+                  <p class="order-delivery-value">30–45 minutes</p>
+                </div>
+              </div>
+              <div class="order-delivery-row">
+                <div class="order-delivery-icon">🏪</div>
+                <div>
+                  <p class="order-delivery-label">From branch</p>
+                  <p class="order-delivery-value">McDonald's — Nearest Branch</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Payment & Contact -->
+        <div class="order-payment-col">
+
+          <!-- Contact Details -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <h3>Contact Details</h3>
+            </div>
+            <div class="order-fields">
+              <div class="order-field-group">
+                <label class="order-field-label">Full Name</label>
+                <input type="text" class="order-input" id="contactName" placeholder="e.g. Juan dela Cruz"/>
+              </div>
+              <div class="order-field-group">
+                <label class="order-field-label">Mobile Number</label>
+                <div style="display:flex;gap:8px;">
+                  <select class="order-prefix-select" aria-label="Country code">
+                    <option value="+63">🇵🇭 +63</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+44">🇬🇧 +44</option>
+                  </select>
+                  <input type="tel" class="order-input" id="contactPhone" placeholder="9XX XXX XXXX" style="flex:1;"/>
+                </div>
+              </div>
+              <div class="order-field-group">
+                <label class="order-field-label">Delivery Notes <span style="color:var(--light);font-weight:400;">(optional)</span></label>
+                <textarea class="order-input order-textarea" id="deliveryNotes" placeholder="e.g. Leave at the door, Ring the bell…" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <h3>Payment Method</h3>
+            </div>
+            <div class="order-payment-options" id="paymentOptions">
+              <label class="order-payment-option selected" data-value="cod">
+                <input type="radio" name="payment" value="cod" checked/>
+                <div class="order-payment-icon">💵</div>
+                <div class="order-payment-info">
+                  <p class="order-payment-name">Cash on Delivery</p>
+                  <p class="order-payment-desc">Pay when your order arrives</p>
+                </div>
+                <div class="order-payment-check">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                </div>
+              </label>
+              <label class="order-payment-option" data-value="gcash">
+                <input type="radio" name="payment" value="gcash"/>
+                <div class="order-payment-icon">💙</div>
+                <div class="order-payment-info">
+                  <p class="order-payment-name">GCash</p>
+                  <p class="order-payment-desc">Pay via GCash e-wallet</p>
+                </div>
+                <div class="order-payment-check">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                </div>
+              </label>
+              <label class="order-payment-option" data-value="card">
+                <input type="radio" name="payment" value="card"/>
+                <div class="order-payment-icon">💳</div>
+                <div class="order-payment-info">
+                  <p class="order-payment-name">Credit / Debit Card</p>
+                  <p class="order-payment-desc">Visa, Mastercard, JCB</p>
+                </div>
+                <div class="order-payment-check">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Place Order CTA -->
+          <button class="place-order-btn" id="placeOrderBtn">
+            <span class="place-order-btn-inner" id="placeOrderBtnInner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+              Place Order
+            </span>
+            <div class="confirm-ripple"></div>
+          </button>
+          <p class="order-terms">By placing your order, you agree to our <a href="#">Terms &amp; Conditions</a>.</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER SUCCESS OVERLAY -->
+  <div class="order-success-overlay" id="orderSuccessOverlay">
+    <div class="order-success-card">
+      <div class="order-success-anim">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="#FFC72C"/>
+          <path d="M24 42l11 11 21-22" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="order-success-title">Order Placed! 🎉</h2>
+      <p class="order-success-sub">Your McDelivery is on its way. Sit tight — it'll be there in 30–45 minutes.</p>
+      <div class="order-success-id">
+        Order #<span id="orderSuccessId">MCD-000000</span>
+      </div>
+      <div class="order-success-track">
+        <div class="order-track-step done">
+          <div class="order-track-dot"></div>
+          <span>Order Received</span>
+        </div>
+        <div class="order-track-line"></div>
+        <div class="order-track-step active">
+          <div class="order-track-dot"></div>
+          <span>Preparing</span>
+        </div>
+        <div class="order-track-line"></div>
+        <div class="order-track-step">
+          <div class="order-track-dot"></div>
+          <span>On the Way</span>
+        </div>
+        <div class="order-track-line"></div>
+        <div class="order-track-step">
+          <div class="order-track-dot"></div>
+          <span>Delivered</span>
+        </div>
+      </div>
+      <button class="order-success-close" id="orderSuccessClose">Done</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 33V14C2 7 7 3 13 3C16.5 3 19.5 5 21 8C22.5 5 25.5 3 29 3C35 3 38 7 38 14V33H32V14.5C32 11 30 8 27 8C24 8 22 11 22 14.5V33H18V14.5C18 11 16 8 13 8C10 8 8 11 8 14.5V33H2Z" fill="#FFC72C"/>
+          </svg>
+        </div>
+        <div class="footer-brand-info">
+          <p class="footer-brand-name">McDelivery</p>
+          <p class="footer-brand-tagline">I'm lovin' it 🍔</p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+          <a href="#">About</a>
+          <a href="#">Charity</a>
+          <a href="#">Careers</a>
+          <a href="#">Business Opportunities</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Support</p>
+          <a href="#">Contact Us</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">FAQs</a>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <p class="footer-social-title">For news and updates, follow us</p>
+        <div class="social-row">
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.74a4.85 4.85 0 0 1-1.01-.05z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 McDonald's. All rights reserved.</p>
+      <p>Powered by McDelivery Philippines</p>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div class="login-modal-overlay" id="loginModalOverlay">
+    <div class="login-modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+
+      <button class="login-modal-close" id="loginModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="login-modal-logo">
+        <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 33V14C2 7 7 3 13 3C16.5 3 19.5 5 21 8C22.5 5 25.5 3 29 3C35 3 38 7 38 14V33H32V14.5C32 11 30 8 27 8C24 8 22 11 22 14.5V33H18V14.5C18 11 16 8 13 8C10 8 8 11 8 14.5V33H2Z" fill="#FFC72C"/>
+        </svg>
+      </div>
+
+      <h2 class="login-modal-title" id="loginModalTitle">Welcome back!</h2>
+      <p class="login-modal-sub">Sign in to your account.</p>
+
+      <div class="login-modal-fields">
+        <div class="lm-field-wrap">
+          <input type="email" id="lmEmail" class="lm-input" placeholder="Email" autocomplete="email"/>
+        </div>
+        <div class="lm-field-wrap">
+          <input type="password" id="lmPassword" class="lm-input" placeholder="Password" autocomplete="current-password"/>
+          <button type="button" class="lm-pw-toggle" id="lmPwToggle" aria-label="Toggle password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <a href="#" class="lm-forgot">Forgot your password?</a>
+
+      <button class="lm-login-btn" id="lmLoginBtn" disabled>Log In</button>
+
+      <div class="lm-divider"><span>OR</span></div>
+
+      <button class="lm-fb-btn">
+        <svg viewBox="0 0 24 24" fill="#1877F2" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Log in with Facebook
+      </button>
+
+      <button class="lm-guest-btn" id="lmGuestBtn">Continue as guest</button>
+
+      <p class="lm-terms">By continuing, you agree to our updated <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+
+      <p class="lm-signup-prompt">Order fast and easy with a McDelivery account.<br/><a href="#" id="lmSignupLink">Sign up here.</a></p>
+
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div class="login-modal-overlay" id="signupModalOverlay">
+    <div class="login-modal" id="signupModal" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle" style="max-height:90vh;overflow-y:auto;">
+
+      <button class="login-modal-close" id="signupModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="login-modal-logo">
+        <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 33V14C2 7 7 3 13 3C16.5 3 19.5 5 21 8C22.5 5 25.5 3 29 3C35 3 38 7 38 14V33H32V14.5C32 11 30 8 27 8C24 8 22 11 22 14.5V33H18V14.5C18 11 16 8 13 8C10 8 8 11 8 14.5V33H2Z" fill="#FFC72C"/>
+        </svg>
+      </div>
+
+      <h2 class="login-modal-title" id="signupModalTitle">Ready to sign up?</h2>
+      <p class="login-modal-sub">Tell us a bit about yourself for a better delivery experience.</p>
+
+      <p class="signup-section-label" style="margin-top:20px;">User Details</p>
+      <div class="login-modal-fields">
+        <div style="display:flex;gap:10px;">
+          <div class="lm-field-wrap" style="flex:1;">
+            <input type="text" id="suFirstName" class="lm-input" placeholder="First Name" autocomplete="given-name"/>
+          </div>
+          <div class="lm-field-wrap" style="flex:1;">
+            <input type="text" id="suLastName" class="lm-input" placeholder="Last Name" autocomplete="family-name"/>
+          </div>
+        </div>
+      </div>
+
+      <p class="signup-section-label" style="margin-top:16px;">Login &amp; Contact Details</p>
+      <div class="login-modal-fields">
+        <div class="lm-field-wrap">
+          <input type="email" id="suEmail" class="lm-input" placeholder="Email Address" autocomplete="email"/>
+        </div>
+        <div class="lm-field-wrap" style="display:flex;gap:8px;padding:0;">
+          <select class="su-prefix-select" aria-label="Country code" style="border-radius:10px;border:1.5px solid var(--border,#e5e7eb);padding:0 10px;font-size:14px;background:#fff;cursor:pointer;">
+            <option value="+63">&#127477;&#127469; +63</option>
+            <option value="+1">&#127482;&#127480; +1</option>
+            <option value="+44">&#127468;&#127463; +44</option>
+            <option value="+65">&#127480;&#127468; +65</option>
+            <option value="+61">&#127462;&#127482; +61</option>
+          </select>
+          <input type="tel" id="suPhone" class="lm-input" placeholder="9XX XXX XXXX" autocomplete="tel-national" style="flex:1;"/>
+        </div>
+        <div class="lm-field-wrap">
+          <input type="password" id="suPassword" class="lm-input" placeholder="Create a password" autocomplete="new-password"/>
+          <button type="button" class="lm-pw-toggle" id="suPwToggle1" aria-label="Toggle password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div style="display:flex;gap:4px;margin:-8px 0 4px;">
+          <div class="pw-bar" id="suBar1"></div>
+          <div class="pw-bar" id="suBar2"></div>
+          <div class="pw-bar" id="suBar3"></div>
+          <div class="pw-bar" id="suBar4"></div>
+        </div>
+        <div class="pw-strength-label" id="suPwLabel" style="font-size:12px;min-height:16px;margin-bottom:4px;"></div>
+        <div class="lm-field-wrap">
+          <input type="password" id="suConfirm" class="lm-input" placeholder="Confirm password" autocomplete="new-password"/>
+          <button type="button" class="lm-pw-toggle" id="suPwToggle2" aria-label="Toggle password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="signup-checkbox-group" style="margin-top:12px;">
+        <label class="su-checkbox-label">
+          <input type="checkbox" id="suChkPromo"/>
+          <div class="su-checkbox-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <span class="su-checkbox-text">I would like to receive announcements and promotions from McDonald's.</span>
+        </label>
+        <label class="su-checkbox-label">
+          <input type="checkbox" id="suChkData" required/>
+          <div class="su-checkbox-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <span class="su-checkbox-text">I consent to the use and processing of my personal information for the Customer Relationship Management of Golden Arches Development Corporation.</span>
+        </label>
+        <label class="su-checkbox-label">
+          <input type="checkbox" id="suChkTerms" required/>
+          <div class="su-checkbox-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <span class="su-checkbox-text">I have fully read, understood, and agree to the <a href="#">Data Privacy Policy, Terms &amp; Conditions</a> of GADC / McDonald's Philippines.</span>
+        </label>
+      </div>
+
+      <button class="signup-submit-btn" id="signupSubmitBtn" disabled style="width:100%;margin-top:16px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+        Create your Account
+      </button>
+
+      <p class="lm-signup-prompt" style="margin-top:16px;">Already have an account? <a href="#" id="suLoginLink">Log in here.</a></p>
+
+    </div>
+  </div>
+
+  <!-- PROFILE MODAL -->
+  <div class="login-modal-overlay" id="profileModalOverlay">
+    <div class="login-modal profile-modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+
+      <button class="login-modal-close" id="profileModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-avatar-big" id="profileAvatarBig">JD</div>
+        <div class="profile-header-info">
+          <h2 class="profile-display-name" id="profileDisplayName">John Doe</h2>
+          <p class="profile-display-email" id="profileDisplayEmail">john@example.com</p>
+          <p class="profile-member-since">Member since <span id="profileMemberSince">—</span></p>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="profile-tabs">
+        <button class="profile-tab-btn active" data-tab="info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Personal Info
+        </button>
+        <button class="profile-tab-btn" data-tab="security">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Security
+        </button>
+      </div>
+
+      <!-- Tab: Personal Info -->
+      <div class="profile-tab-pane active" id="profileTab_info">
+        <div class="login-modal-fields" style="margin-top:16px;">
+          <div style="display:flex;gap:10px;">
+            <div class="lm-field-wrap" style="flex:1;">
+              <input type="text" id="profileFirstName" class="lm-input" placeholder="First Name" autocomplete="given-name"/>
+            </div>
+            <div class="lm-field-wrap" style="flex:1;">
+              <input type="text" id="profileLastName" class="lm-input" placeholder="Last Name" autocomplete="family-name"/>
+            </div>
+          </div>
+          <div class="lm-field-wrap">
+            <input type="email" id="profileEmail" class="lm-input" placeholder="Email Address" disabled style="opacity:0.6;cursor:not-allowed;"/>
+            <span class="profile-field-lock" title="Email cannot be changed">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+          </div>
+          <div class="lm-field-wrap">
+            <input type="tel" id="profilePhone" class="lm-input" placeholder="Phone Number" autocomplete="tel"/>
+          </div>
+        </div>
+        <button class="lm-login-btn profile-save-btn" id="profileSaveBtn" style="margin-top:16px;">Save Changes</button>
+      </div>
+
+      <!-- Tab: Security -->
+      <div class="profile-tab-pane" id="profileTab_security">
+        <p class="signup-section-label" style="margin-top:16px;">Change Password</p>
+        <div class="login-modal-fields" style="margin-top:12px;">
+          <div class="lm-field-wrap">
+            <input type="password" id="profilePwOld" class="lm-input" placeholder="Current password"/>
+            <button type="button" class="lm-pw-toggle" id="profilePwOldToggle" aria-label="Toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="lm-field-wrap">
+            <input type="password" id="profilePwNew" class="lm-input" placeholder="New password (min 6 chars)"/>
+            <button type="button" class="lm-pw-toggle" id="profilePwNewToggle" aria-label="Toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <p id="profilePwMsg" style="font-size:13px;min-height:18px;margin:6px 0 4px;"></p>
+        <button class="lm-login-btn profile-save-btn" id="profilePwSaveBtn" style="margin-top:8px;">Update Password</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (function initSignupModal() {
+      const overlay      = document.getElementById('signupModalOverlay');
+      const closeBtn     = document.getElementById('signupModalClose');
+      const signupNavBtn = document.getElementById('signupNavBtn');
+      const signupMobile = document.getElementById('signupMobileBtn');
+      const lmSignupLink = document.getElementById('lmSignupLink');
+      const suLoginLink  = document.getElementById('suLoginLink');
+      const loginOverlay = document.getElementById('loginModalOverlay');
+      const loginNavBtn  = document.getElementById('loginNavBtn');
+
+      if (!overlay) return;
+
+      function openSignup() {
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (loginOverlay) loginOverlay.classList.remove('open');
+      }
+      function closeSignup() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (signupNavBtn) signupNavBtn.addEventListener('click', (e) => { e.preventDefault(); openSignup(); });
+      if (signupMobile) signupMobile.addEventListener('click', (e) => { e.preventDefault(); openSignup(); });
+      if (lmSignupLink) lmSignupLink.addEventListener('click', (e) => { e.preventDefault(); openSignup(); });
+      if (suLoginLink)  suLoginLink.addEventListener('click',  (e) => { e.preventDefault(); closeSignup(); if (loginNavBtn) loginNavBtn.click(); });
+      if (closeBtn)     closeBtn.addEventListener('click', closeSignup);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSignup(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeSignup(); });
+    })();
+  </script>
+</body>
+</html>
